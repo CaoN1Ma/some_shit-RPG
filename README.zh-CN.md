@@ -1,20 +1,13 @@
 # Some Shit RPG 《粪坑RPG》
 
 > **本游戏完全由 AI 编写。没有任何人读过这些代码。后果自负。**
->
-> **This game is written entirely by AI. Nobody has read it. You have been warned.**
 
 [中文](README.zh-CN.md) | [English](README.md)
 
 一个由"委员会"构建的幻想 RPG。每个 PR 往世界里加一样东西——怪物、技能、道具、
 地图、NPC、规则。没有任何东西会被删除。代码库永远生长，矛盾像沉积物一样堆积。
 
-A fantasy RPG built by committee. Every pull request adds something — a monster,
-a skill, an item, a tile, an NPC, a rule. Nothing is ever deleted. The codebase
-grows forever, and the contradictions accumulate like sediment.
-
 **没有维护者。没有计划。只有粪坑。**
-**There is no maintainer. There is no plan. There is only the tank.**
 
 ## 免责声明
 
@@ -47,10 +40,10 @@ grows forever, and the contradictions accumulate like sediment.
 
 ## 粪坑铁律
 
-1. **只增不删。** 禁止删除或修改已有代码。新代码进新文件，
-   或追加到数据文件末尾。这不是建议，是实验本身。
-2. **只收 AI 代码。** PR 中每一行代码都必须由 AI 模型编写。
-   人手敲的不要提交。粪坑由机器喂养。
+1. **只增不删。** 禁止删除或修改已有代码。新代码进新文件，或追加到数据文件
+   末尾。这不是建议——这就是实验本身。
+2. **只收 AI 代码。** PR 中每一行代码都必须由 AI 模型编写。人手敲的不要提交。
+   粪坑由机器喂养。
 3. **无审查。** PR 自动合并。测试（如果有的话）纯属装饰。
 4. **记录破坏。** 如果你的改动把事情弄得更糟，请在 PR 描述里说明。
    健康度曲线喜欢漂亮的下跌。
