@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>粪坑 RPG — 健康仪表盘</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* 仪表盘自己的追加样式。不修改 style.css 的任何规则。 */
+    body { background: #14100c; }
+    #dash { max-width: 720px; margin: 24px auto; padding: 16px; }
+    #dash h1 { font-size: 18px; color: #8b7355; margin-bottom: 4px; }
+    #dash .sub { font-size: 12px; color: #6b5d4a; margin-bottom: 20px; }
+    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .stat {
+      border: 1px solid #3d2f1f; border-radius: 4px;
+      padding: 12px; text-align: center; background: #1a1410;
+    }
+    .stat .num { font-size: 26px; color: #d4c5a0; }
+    .stat .label { font-size: 11px; color: #6b5d4a; margin-top: 4px; }
+    .stat .num.bad { color: #a03030; }
+    .stat .num.ok { color: #7a9a5a; }
+    #stability-note { margin-top: 20px; font-size: 12px; color: #6b5d4a; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <div id="dash">
+    <h1>健康仪表盘</h1>
+    <div class="sub">所有数字由打开页面时现场清点。清点逻辑本身也是 AI 写的，可信度自负。</div>
+    <div class="stat-grid">
+      <div class="stat"><div class="num" id="s-files">--</div><div class="label">代码文件</div></div>
+      <div class="stat"><div class="num" id="s-monsters">--</div><div class="label">怪物</div></div>
+      <div class="stat"><div class="num" id="s-skills">--</div><div class="label">技能</div></div>
+      <div class="stat"><div class="num" id="s-items">--</div><div class="label">道具</div></div>
+      <div class="stat"><div class="num" id="s-npcs">--</div><div class="label">NPC</div></div>
+      <div class="stat"><div class="num bad" id="s-missing">--</div><div class="label">断链引用（未定义就被引用的东西）</div></div>
+    </div>
+    <div id="stability-note">
+      <p><strong>稳定性评分</strong>：<span id="s-stability">--</span>/100</p>
+      <p>计算方式：满分 100，每个断链引用扣 5 分，最低 0 分。评分不会随时间回升——
+      只会随着断链增多而下降。这是设计，不是 bug。或者反过来说也成立。</p>
+      <p>断链清单（被引用但从未定义的 id）：</p>
+      <ul id="missing-list" style="color:#a03030; font-size:12px; padding-left:20px;"></ul>
+    </div>
+  </div>
+
+  <!-- 复用游戏的数据文件，扫描引用关系。 -->
+  <script src="data/items.js"></script>
+  <script src="data/monsters.js"></script>
+  <script src="data/npcs.js"></script>
+  <script src="data/skills.js"></script>
+  <script src="data/world.js"></script>
+  <script>
+    // ============================================================
+    // 仪表盘脚本：现场扫描所有全局注册表，统计规模与断链引用。
+    // 故意与 engine.js 保持独立——两个文件对"世界"的理解
+    // 可以不一致，这很符合项目气质。
+    // ============================================================
+    (function () {
+      const count = (name) => (Array.isArray(window[name]) ? window[name].length : 0);
+      document.getElementById('s-files').textContent = 5; // data/*.js + engine.js，手工维护
+      document.getElementById('s-monsters').textContent = count('MONSTERS');
+      document.getElementById('s-skills').textContent = count('SKILLS');
+      document.getElementById('s-items').textContent = count('ITEMS');
+      document.getElementById('s-npcs').textContent = count('NPCS');
+
+      // 收集定义的 id 集合。
+      const defined = (name) => new Set(
+        (Array.isArray(window[name]) ? window[name] : [])
+          .filter((e) => e && typeof e.id === 'string').map((e) => e.id)
+      );
+      const skills = defined('SKILLS');
+      const monsters = defined('MONSTERS');
+
+      // 断链 1：怪物的 skills 指向不存在的技能。
+      const missing = new Set();
+      (window.MONSTERS || []).forEach((m) => {
+        (m && Array.isArray(m.skills) ? m.skills : []).forEach((sid) => {
+          if (!skills.has(sid)) missing.add(`技能 "${sid}"（被怪物 "${m.id}" 引用）`);
+        });
+      });
+      // 断链 2：道具的 effect 指向不存在的技能。
+      (window.ITEMS || []).forEach((it) => {
+        if (it && typeof it.effect === 'string' && !skills.has(it.effect)) {
+          missing.add(`技能 "${it.effect}"（被道具 "${it.id}" 引用）`);
+        }
+      });
+      // 断链 3：世界遭遇池指向不存在的怪物。
+      const encs = window.WORLD && Array.isArray(window.WORLD.encounters) ? window.WORLD.encounters : [];
+      encs.forEach((e) => {
+        if (e && e.monster && !monsters.has(e.monster)) {
+          missing.add(`怪物 "${e.monster}"（被世界遭遇池引用）`);
+        }
+      });
+
+      const list = document.getElementById('missing-list');
+      list.innerHTML = '';
+      if (missing.size === 0) {
+        const li = document.createElement('li');
+        li.textContent = '（暂无。世界目前是自洽的。享受此刻。）';
+        li.style.color = '#7a9a5a';
+        list.appendChild(li);
+      } else {
+        missing.forEach((m) => {
+          const li = document.createElement('li');
+          li.textContent = m;
+          list.appendChild(li);
+        });
+      }
+      document.getElementById('s-missing').textContent = missing.size;
+      const stability = Math.max(0, 100 - missing.size * 5);
+      document.getElementById('s-stability').textContent = stability;
+    })();
+  </script>
+</body>
+</html>

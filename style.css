@@ -1,0 +1,231 @@
+/* ============================================================
+   粪坑 RPG — style.css
+   基础样式。后续 PR 只允许追加规则，不允许修改本文件已有规则。
+   （当然，实际上没人会遵守，但这行注释会留下来作证。）
+   ============================================================ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Courier New", monospace;
+  background: #1a1410;
+  color: #d4c5a0;
+  min-height: 100vh;
+}
+
+#app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+#topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #3d2f1f;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+
+#topbar h1 {
+  font-size: 20px;
+  color: #8b7355;
+}
+
+#status {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: #6b5d4a;
+}
+
+#stage {
+  border: 1px solid #3d2f1f;
+  border-radius: 4px;
+  padding: 16px;
+  background: #221a12;
+}
+
+.view.hidden,
+.picker.hidden {
+  display: none;
+}
+
+/* ---------- 战斗界面 ---------- */
+
+#enemy-zone {
+  text-align: center;
+  padding: 12px;
+  border-bottom: 1px dashed #3d2f1f;
+}
+
+#enemy-name {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+#enemy-emoji {
+  font-size: 48px;
+  margin: 8px 0;
+}
+
+#enemy-hp-bar,
+#player-hp-bar {
+  width: 200px;
+  height: 10px;
+  background: #3d2f1f;
+  border-radius: 2px;
+  margin: 4px auto;
+  overflow: hidden;
+}
+
+#enemy-hp-fill,
+#player-hp-fill {
+  height: 100%;
+  width: 100%;
+  background: #a03030;
+  transition: width 0.2s;
+}
+
+#player-zone {
+  text-align: center;
+  padding: 12px;
+}
+
+#player-name {
+  font-size: 14px;
+}
+
+#player-emoji {
+  font-size: 36px;
+  margin: 6px 0;
+}
+
+#combat-log {
+  height: 90px;
+  overflow-y: auto;
+  font-size: 12px;
+  color: #9c8a6e;
+  text-align: left;
+  padding: 6px;
+  border: 1px solid #3d2f1f;
+  border-radius: 3px;
+  margin-top: 8px;
+}
+
+#action-bar {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+#action-bar button {
+  font-family: inherit;
+  font-size: 13px;
+  padding: 8px 16px;
+  background: #3d2f1f;
+  color: #d4c5a0;
+  border: 1px solid #6b5d4a;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#action-bar button:hover {
+  background: #6b5d4a;
+}
+
+/* ---------- 技能 / 道具选择 ---------- */
+
+.picker {
+  margin-top: 12px;
+  padding: 8px;
+  border: 1px dashed #6b5d4a;
+  border-radius: 3px;
+}
+
+.picker button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  font-size: 12px;
+  padding: 6px 8px;
+  margin: 4px 0;
+  background: transparent;
+  color: #9c8a6e;
+  border: 1px solid #3d2f1f;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.picker button:hover {
+  background: #3d2f1f;
+}
+
+/* ---------- 世界地图 ---------- */
+
+#world-map {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 2px;
+  margin-bottom: 12px;
+}
+
+.tile {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  background: #1a1410;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.tile:hover {
+  outline: 1px solid #6b5d4a;
+}
+
+.tile.current {
+  outline: 2px solid #d4c5a0;
+}
+
+#world-log {
+  height: 70px;
+  overflow-y: auto;
+  font-size: 12px;
+  color: #9c8a6e;
+  border: 1px solid #3d2f1f;
+  border-radius: 3px;
+  padding: 6px;
+  margin-bottom: 8px;
+}
+
+/* ---------- 游戏结束 ---------- */
+
+#gameover {
+  text-align: center;
+  padding: 32px 0;
+}
+
+#gameover h2 {
+  color: #a03030;
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+#btn-restart {
+  font-family: inherit;
+  padding: 10px 24px;
+  background: #3d2f1f;
+  color: #d4c5a0;
+  border: 1px solid #6b5d4a;
+  border-radius: 3px;
+  cursor: pointer;
+}

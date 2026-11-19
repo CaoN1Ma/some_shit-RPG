@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>粪坑 RPG</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header id="topbar">
+      <h1>粪坑 RPG</h1>
+      <div id="status">
+        <span id="gold">Gold: 0</span>
+        <span id="party">Party: --</span>
+      </div>
+    </header>
+
+    <main id="stage">
+      <!-- Combat view -->
+      <section id="combat" class="view">
+        <div id="enemy-zone">
+          <div id="enemy-name">--</div>
+          <div id="enemy-hp-bar"><div id="enemy-hp-fill"></div></div>
+          <div id="enemy-emoji">❓</div>
+          <div id="combat-log"></div>
+        </div>
+        <div id="player-zone">
+          <div id="player-name">Hero</div>
+          <div id="player-hp-bar"><div id="player-hp-fill"></div></div>
+          <div id="player-emoji">🛡️</div>
+        </div>
+        <div id="action-bar">
+          <button id="btn-attack">Attack</button>
+          <button id="btn-skill">Skills</button>
+          <button id="btn-item">Items</button>
+          <button id="btn-run">Run</button>
+        </div>
+        <div id="skill-picker" class="picker hidden"></div>
+        <div id="item-picker" class="picker hidden"></div>
+      </section>
+
+      <!-- Overworld view -->
+      <section id="overworld" class="view hidden">
+        <div id="world-map"></div>
+        <div id="world-log"></div>
+        <button id="btn-back">Menu</button>
+      </section>
+
+      <!-- Game over -->
+      <section id="gameover" class="view hidden">
+        <h2>You Died.</h2>
+        <p id="death-text">The tank claimed another.</p>
+        <button id="btn-restart">New Game</button>
+      </section>
+    </main>
+  </div>
+
+  <!-- 数据文件先于引擎加载，按字母顺序（见 CONTRIBUTING.md）。
+       新增 data/*.js 时：在这里加一行 <script>，并保证字母序。 -->
+  <script src="data/items.js"></script>
+  <script src="data/monsters.js"></script>
+  <script src="data/npcs.js"></script>
+  <script src="data/skills.js"></script>
+  <script src="data/world.js"></script>
+  <!-- Engine loads last. -->
+  <script src="engine.js"></script>
+</body>
+</html>
