@@ -30,7 +30,7 @@ window.WORLD = {
 
   // 遭遇战怪物池（按权重抽取）。
   encounters: [
-    { monster: 'septic_slime', weight: 5 },
+    { monster: 'turd_slime', weight: 5 },
     { monster: 'gutter_rat', weight: 3 },
     { monster: 'the_uncleared_warning', weight: 1 },
   ],

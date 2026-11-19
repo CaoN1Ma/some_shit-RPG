@@ -14,7 +14,7 @@
 // 全局怪物注册表。engine.js 在页面加载后读取 window.MONSTERS。
 window.MONSTERS = [
   {
-    id: 'septic_slime',
+    id: 'turd_slime',
     name: 'Septic Slime 粪坑史莱姆',
     emoji: '🟢',
     hp: 40,

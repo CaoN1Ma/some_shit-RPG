@@ -3,6 +3,7 @@
 //
 // 本项目规则是"代码不检查，直接合并"，测试是装饰性的。
 // 但初始框架必须自己先能跑起来——粪坑的地基不能是空的。
+// 项目名：Some Shit RPG 《粪坑RPG》
 //
 // 用无头 DOM 桩模拟浏览器环境，在 Node 里驱动 engine.js
 // 的核心流程：新游戏 → 移动 → 遭遇战 → 攻击 → 胜利/死亡。
@@ -107,8 +108,8 @@ vm.runInContext('move(1, 0)', ctx);
 check('踩 NPC 格子仍可移动', G.pos.join() === '2,2' && G.mode === 'overworld');
 
 // 强制开一场战斗并打死它。
-vm.runInContext('startCombat("septic_slime")', ctx);
-check('遭遇战开始', G.mode === 'combat' && G.enemy && G.enemy.id === 'septic_slime');
+vm.runInContext('startCombat("turd_slime")', ctx);
+check('遭遇战开始', G.mode === 'combat' && G.enemy && G.enemy.id === 'turd_slime');
 check('敌人 HP 快照初始化', typeof G.enemy.hpNow === 'number');
 
 // 反复攻击直到胜利（史莱姆 40 HP，每次至少 1 伤，最多几十回合）。

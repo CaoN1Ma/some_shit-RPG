@@ -1,4 +1,4 @@
-# 粪坑 RPG — .gitignore
+# Some Shit RPG 《粪坑RPG》 — .gitignore
 # 本项目是纯前端、零构建、零依赖，理论上没有"产物"。
 # 但规则要求 .gitignore 覆盖各语言常见产物，所以照抄一份，
 # 供未来某个 PR 引入构建工具时使用（愿它永不启用）。

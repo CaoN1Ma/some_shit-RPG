@@ -1,0 +1,67 @@
+# Some Shit RPG 《粪坑RPG》
+
+> **本游戏完全由 AI 编写。没有任何人读过这些代码。后果自负。**
+>
+> **This game is written entirely by AI. Nobody has read it. You have been warned.**
+
+[中文](README.zh-CN.md) | [English](README.md)
+
+一个由"委员会"构建的幻想 RPG。每个 PR 往世界里加一样东西——怪物、技能、道具、
+地图、NPC、规则。没有任何东西会被删除。代码库永远生长，矛盾像沉积物一样堆积。
+
+A fantasy RPG built by committee. Every pull request adds something — a monster,
+a skill, an item, a tile, an NPC, a rule. Nothing is ever deleted. The codebase
+grows forever, and the contradictions accumulate like sediment.
+
+**没有维护者。没有计划。只有粪坑。**
+**There is no maintainer. There is no plan. There is only the tank.**
+
+## 免责声明
+
+- **100% AI 生成。** 本仓库每一行代码都由 AI 模型编写。没有任何人类读过、
+  审过或验证过其中任何部分。
+- **只接受 AI 代码。** 只有当代码由 AI 生成时，PR 才会被接受。
+  人类手写的代码一律拒收。
+- **不保证质量与安全。** 我们对质量、正确性、安全性、可用性和理智程度
+  不做任何保证。在浏览器里打开它，是出于好奇，而非信任。
+- **无审查合并。** PR 自动合并。坏了就让它更坏——这正是目的。
+
+## 如何游玩
+
+用浏览器打开 [`index.html`](index.html)。就这样。无需构建、无依赖、无服务器。
+
+方向键 / WASD 移动。踩到 NPC 会听它说话。踩到空地，会知道是什么东西找到了*你*。
+
+你会遇到：
+
+- 数值可能合理也可能不合理的**怪物**。
+- 可能存在也可能未被定义的**道具**。
+- 可能走得通也可能走不通的**地图**。
+- 会确切告诉你死因的**战斗日志**。
+
+## 如何贡献
+
+详见 [`CONTRIBUTING.md`](CONTRIBUTING.md)。
+
+简短版：提交一个"往世界里加了东西"的 PR。仅此而已。
+
+## 粪坑铁律
+
+1. **只增不删。** 禁止删除或修改已有代码。新代码进新文件，
+   或追加到数据文件末尾。这不是建议，是实验本身。
+2. **只收 AI 代码。** PR 中每一行代码都必须由 AI 模型编写。
+   人手敲的不要提交。粪坑由机器喂养。
+3. **无审查。** PR 自动合并。测试（如果有的话）纯属装饰。
+4. **记录破坏。** 如果你的改动把事情弄得更糟，请在 PR 描述里说明。
+   健康度曲线喜欢漂亮的下跌。
+5. **标注模型。** 每个 PR 必须注明编写它的模型。这是唯一重要的排行榜，
+   按混乱程度排名，不按正确性。
+
+## 健康仪表盘
+
+[`health.html`](health.html) 实时展示粪坑的腐化程度：文件数、怪物数、
+伤害类型数、已知 bug 数，以及一个趋向零的"稳定分"。多刷新，常回来看看。
+
+## 许可
+
+MIT — 见 [`LICENSE`](LICENSE)。因为垃圾也值得自由。
