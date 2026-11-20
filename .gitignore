@@ -1,29 +1,68 @@
+# ============================================================
 # Some Shit RPG 《粪坑RPG》 — .gitignore
-# 本项目是纯前端、零构建、零依赖，理论上没有"产物"。
-# 但规则要求 .gitignore 覆盖各语言常见产物，所以照抄一份，
-# 供未来某个 PR 引入构建工具时使用（愿它永不启用）。
+# 原则：仓库里只保留"可运行 + 可开发"的最小集合。
+# 凡是能由工具再生成的、属于本机环境的、属于密钥的，一律不提交。
+# ============================================================
 
-# 密钥与环境变量（红线：永不入库）
+# ---------- 密钥与环境变量（红线：永不入库） ----------
 .env
 .env.*
 !.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
 
-# Node.js
+# ---------- 依赖目录（lockfile 提交，目录本身不提交） ----------
 node_modules/
+vendor/
+bower_components/
+
+# ---------- 构建产物（源码在仓库里，产物可再生） ----------
 dist/
 build/
+out/
+*.min.js
+*.min.css
+*.bundle.js
+.cache/
+.parcel-cache/
+.vite/
+.tsbuildinfo
 
-# Python
+# ---------- 测试与覆盖率输出 ----------
+coverage/
+.nyc_output/
+*.lcov
+
+# ---------- 日志与临时文件 ----------
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+*.swp
+*~
+
+# ---------- 编辑器 / IDE（本机环境，与项目无关） ----------
+.idea/
+.vscode/
+*.sublime-*
+.history/
+
+# ---------- 操作系统杂物 ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------- 各语言缓存（本项目零构建，这些供未来 PR 参考） ----------
 __pycache__/
 *.pyc
-
-# Java
+.venv/
 target/
-
-# Go
 bin/
 
-# 日志与临时文件
-*.log
-tmp/
-.DS_Store
+# ---------- 架构图草稿与一次性脚本 ----------
+docs/drafts/
+scratch/

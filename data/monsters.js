@@ -15,7 +15,7 @@
 window.MONSTERS = [
   {
     id: 'turd_slime',
-    name: 'Septic Slime 粪坑史莱姆',
+    name: 'Turd Slime 屎泥怪',
     emoji: '🟢',
     hp: 40,
     atk: 8,

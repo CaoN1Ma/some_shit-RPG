@@ -95,17 +95,23 @@ check('新游戏已启动（玩家存在）', !!G.player);
 check('玩家 HP 为满', G.player.hp === G.player.maxHp);
 check('出生点来自 world.js', Array.isArray(G.pos) && G.pos.join() === w.WORLD.spawn.join());
 
+// 随机性消除：移动断言只关心"走没走到"，不该被 12% 的随机遭遇
+// 搅局（否则整个测试每 8 次就随机挂一次，刚才真的挂过）。
+// 做法是临时清空遭遇池，测完立刻还原——测试不许改变世界。
+const savedEncounters = w.WORLD.encounters;
+w.WORLD.encounters = [];
+
 // 移动：出生点 (1,1) 下方 (1,2) 是 '.'，可走。
 vm.runInContext('move(0, 1)', ctx);
 check('向下走一步生效', G.pos.join() === '1,2');
 check('步数计数 +1', G.stepCount === 1);
 
-// 撞墙：向左是 (0,2)='T' 可走，向右撞 (3,2)='#'？
-// 世界第 3 行是 'T.......~~'，(3,2) 是 '.'。改用确定的一步：
 // 从 (1,2) 向右走到 (2,2)——那是档案管理员的格子，不会遇敌。
-const before = G.pos.join();
 vm.runInContext('move(1, 0)', ctx);
 check('踩 NPC 格子仍可移动', G.pos.join() === '2,2' && G.mode === 'overworld');
+
+// 还原遭遇池：之后的测试照常使用 world.js 的原始随机遭遇数据。
+w.WORLD.encounters = savedEncounters;
 
 // 强制开一场战斗并打死它。
 vm.runInContext('startCombat("turd_slime")', ctx);
