@@ -23,8 +23,10 @@ grows forever, and the contradictions accumulate like sediment.
 - **No warranty. No safety.** We make absolutely no guarantee about quality,
   correctness, security, fitness for purpose, or sanity. Running this game in a
   browser is an act of curiosity, not trust.
-- **Merge without review.** PRs are merged automatically. If it breaks, the game
-  becomes more broken — which is the point.
+- **Merge without review.** PRs are merged automatically by the
+  [Auto Merge workflow](.github/workflows/auto-merge.yml) (repo setting
+  "Allow auto-merge" must be enabled once by the repo owner). If it breaks, the
+  game becomes more broken — which is the point.
 
 ## What is this game / Current game content
 
