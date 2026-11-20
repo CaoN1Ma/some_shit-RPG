@@ -29,9 +29,12 @@ window.WORLD = {
   spawn: [1, 1],
 
   // 遭遇战怪物池（按权重抽取）。
+  // 2026-11-20：鼠王加入了。为什么下水道里的王不是粪坑之王？
+  // 因为粪坑之王在等一个真正的挑战者走到他面前。
   encounters: [
     { monster: 'turd_slime', weight: 5 },
     { monster: 'gutter_rat', weight: 3 },
     { monster: 'the_uncleared_warning', weight: 1 },
+    { monster: 'rat_king_returned', weight: 1 },
   ],
 };

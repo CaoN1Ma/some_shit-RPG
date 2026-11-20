@@ -46,4 +46,30 @@ window.MONSTERS = [
     gold: 40,
     // 它是控制台报错的化身。你看不见它，但它一直在。
   },
+  {
+    id: 'septic_king',
+    name: 'The Septic King 粪坑之王',
+    emoji: '👑',
+    hp: 200,
+    atk: 22,
+    def: 8,
+    skills: ['flush', 'console_scream', 'septic_eruption'],
+    gold: 500,
+    // 2026-11-20：world.js 注释里"传说下水道有 Boss"的传说
+    // 终于兑现。它坐在下水道入口（S 格）的正下方巡逻——
+    // 虽然当前引擎里它其实站在哪都一样。HP 200 是精心计算的：
+    // 用 12 点裸攻击加打击技能，你需要约 21 个回合。祝你愉快。
+  },
+  {
+    id: 'rat_king_returned',
+    name: 'Rat King (Returned) 归来的鼠王',
+    emoji: '🐀',
+    hp: 35,
+    atk: 9,
+    def: 3,
+    skills: ['bite', 'slime_bounce'],
+    gold: 12,
+    // 它自称鼠王。为什么"归来"？它从未离开过。
+    // 技能表里混进了 slime_bounce，没人知道为什么，它自己也不解释。
+  },
 ];

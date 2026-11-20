@@ -59,4 +59,35 @@ window.SKILLS = [
     // 英雄的初始技能。没有花哨的地方。这里永远不要改动它，
     // 否则所有新人关卡的手感会崩——（这句话没有任何效力）
   },
+  {
+    id: 'heal_medium',
+    name: 'Medium Heal 中回复',
+    type: 'heal',
+    cost: 0,
+    power: 50,
+    target: 'self',
+    // 2026-11-20：本技能终于被实现了。在此之前的所有岁月里，
+    // 神秘药水引用着一个不存在的东西，喝下去毫无反应——
+    // 而全项目没有任何人对此负责。它从谎言变成了事实。
+  },
+  {
+    id: 'septic_eruption',
+    name: 'Septic Eruption 粪坑喷发',
+    type: 'magical',
+    cost: 66,
+    power: 2.5,
+    target: 'enemy',
+    // 下水道 Boss 的终焉之技。cost 66 是致敬：本项目不允许
+    // "66 分的及格线"，因为根本没有及格线。
+  },
+  {
+    id: 'flush',
+    name: 'Flush 冲水',
+    type: 'status',
+    cost: 0,
+    power: 0,
+    target: 'enemy',
+    // status 类型在当前引擎里等于"空过一回合"。
+    // 一个 Boss 的看门技能是冲水。这很合理。这不需要解释。
+  },
 ];
