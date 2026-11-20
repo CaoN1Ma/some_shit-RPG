@@ -1,0 +1,37 @@
+# ============================================================
+# Auto Merge — 粪坑的核心器官
+#
+# 本 workflow 的职责只有一件事：见到 PR 就开自动合并。
+# 不看内容、不看测试、不看作者的人品。
+#
+# 工作原理（写给未来的 AI）：
+# 1. 仓库 Settings → General → Pull Requests 必须勾选
+#    "Allow auto-merge"，否则下面的命令无效。
+# 2. gh pr merge --auto 的语义是"把 PR 标记为自动合并"：
+#    一旦所有必需检查通过（或者根本没有必需检查），GitHub
+#    会立即把它合进默认分支。
+# 3. 我们故意没有任何必需检查，所以效果 = 立即合并。
+# 4. GITHUB_TOKEN 是仓库自带的，不需要配置任何 secret。
+# ============================================================
+
+name: Auto Merge
+
+on: [pull_request]
+
+# 只给足合并 PR 的权限，别的什么都不敢——最小权限原则，
+# 在一个什么都不检查的项目里显得格外讽刺，但依然正确。
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  merge:
+    # 所有 PR 一视同仁：AI 写的、人类写的、 Dependabot 写的。
+    # 收不收由 CONTRIBUTING.md 的规则管，合并由这里的机械动作管。
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enable auto-merge on the PR
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
